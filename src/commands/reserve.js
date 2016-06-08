@@ -18,14 +18,23 @@ const handler = (payload, res, app) => {
     spots = ['6', '9', '10'];
   }
 
-  var attachments = spots.map((spot) => {
-    return {
-      title: `Spot #${spot}`,
-      //title_link: spot.url,
-      //text: `_${spot.description}_\n${spot.language} • ${spot.star}>`,
+  const commandValue = payload.text.replace('reserve', '').trim();
+  const idx = spots.indexOf(commandValue);
+
+  let attachments = [];
+  if (idx > -1) {
+    spots.splice(idx, 1);
+    app.set('available', spots);
+    attachments.push({
+      title: `Spot #${commandValue} is now reserved`,
       mrkdwn_in: ['text', 'pretext']
-    }
-  });
+    });
+  } else {
+    attachments.push({
+      title: `Spot #${commandValue} could not be found. Did you type it correctly?`,
+      mrkdwn_in: ['text', 'pretext']
+    });
+  }
 
   let msg = _.defaults({
     channel: payload.channel_name,
@@ -37,4 +46,4 @@ const handler = (payload, res, app) => {
   return
 }
 
-module.exports = { pattern: /available/ig, handler: handler }
+module.exports = { pattern: /reserve/ig, handler: handler }
