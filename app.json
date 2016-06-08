@@ -1,0 +1,22 @@
+{
+  "name": "Parkbot",
+  "description": "Parkbot is reserves shared parking spots",
+  "repository": "https://github.com/jwynveen/parking-slack-bot",
+  "logo": "https://heroku-www-files.s3.amazonaws.com/starbot/starbot-icon.png",
+  "success_url": "/",
+  "env": {
+    "HEROKU_APP_NAME": {
+      "required": true
+    },
+    "PARKBOT_COMMAND_TOKEN": {
+      "description": "Slash command token, for the parkbot command endpoint",
+      "required": true
+    },
+    "SLACK_TOKEN": {
+      "description": "Slack bot RTM API token",
+      "required": false
+    },
+    "NODE_ENV": "staging"
+  },
+  "image": "heroku/nodejs"
+}
