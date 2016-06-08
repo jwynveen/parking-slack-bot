@@ -39,7 +39,7 @@ app.post('/commands/parkbot', (req, res) => {
     return payload.text.match(cmd.pattern) ? cmd : a
   }, helpCommand)
 
-  cmd.handler(payload, res)
+  cmd.handler(payload, res, app)
 })
 
 app.listen(config('PORT'), (err) => {
