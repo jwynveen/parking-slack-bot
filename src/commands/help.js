@@ -18,9 +18,20 @@ let attachments = [
     mrkdwn_in: ['text']
   },
   {
+    title: 'Reserve a Spot:',
+    color: '#2FA44F',
+    text: '`/park reserve [spot#]` reserves parking spot',
+    mrkdwn_in: ['text']
+  },
+  {
+    title: 'Open a Spot:',
+    color: '#2FA44F',
+    text: '`/park open [spot#]` make parking spot available',
+    mrkdwn_in: ['text']
+  },
+  {
     title: 'Configuring Parkbot',
-    color: '#E3E4E6',
-    text: '`/star help` ... you\'re lookin at it! \n',
+    text: '`/park help` ... you\'re lookin at it! \n',
     mrkdwn_in: ['text']
   }
 ]

@@ -9,7 +9,7 @@ Create a `/park` [custom slash command](https://api.slack.com/slash-commands), u
 
 - `/park` or `/park help` - List available commands
 - `/park available` - Display available parking spots
-- `/park available 10` - Add '10' as an available spot
+- `/park open 10` - Add '10' as an available spot
 - `/park reserve 10` - Reserve spot '10', removing it from the available spots
 
 TODO: Manage spots by date
