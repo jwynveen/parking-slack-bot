@@ -17,14 +17,15 @@ const handler = (payload, res) => {
     let msg = _.defaults({
       channel: payload.channel_name
     }, msgDefaults);
-    const commandValue = payload.text.replace('reserve', '').trim();
+    const commandValue = payload.text.replace('open', '').trim();
     const idx = spots.indexOf(commandValue);
 
-    if (idx > -1) {
-      spots.splice(idx, 1);
+    if (idx === -1) {
+      spots.push(commandValue);
+      spots.sort();
 
       dbService.saveSpots(new Date(), spots, () => {
-        msg.text = `Spot #${commandValue} is now reserved`;
+        msg.text = `Spot #${commandValue} is now available`;
         msg.attachments = [{
           title: 'Available Spots:',
           text: spots.map((spot) => `• Spot #${spot}`).join('\n'),
@@ -34,7 +35,7 @@ const handler = (payload, res) => {
       });
     } else {
       msg.response_type = 'ephemeral';
-      msg.text = `Spot #${commandValue} is not available. Here's the open spots:`;
+      msg.text = `Spot #${commandValue} is already available.`;
       msg.attachments = [{
         title: 'Available Spots:',
         text: spots.map((spot) => `• Spot #${spot}`).join('\n'),
@@ -45,4 +46,4 @@ const handler = (payload, res) => {
   });
 }
 
-module.exports = { pattern: /reserve/ig, handler: handler }
+module.exports = { pattern: /open/ig, handler: handler }
