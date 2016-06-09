@@ -12,7 +12,7 @@ module.exports = {
     getAvailable(client, date, (spots) => {
       client.end();
       if (!spots) {
-        spots = ['6', '9', '10']; // TODO: set up defaults in parkbot_schedule table
+        spots = [/*'6', '9', '10'*/]; // TODO: set up defaults in parkbot_schedule table
       }
       return next(spots);
     });
