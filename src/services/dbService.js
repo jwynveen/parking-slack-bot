@@ -2,6 +2,7 @@
 
 const _ = require('lodash');
 const moment = require('moment');
+const momentTZ = require('moment-timezone');
 const pg = require('pg');
 pg.defaults.ssl = true;
 
@@ -26,7 +27,7 @@ module.exports = {
       console.log(query);
       client.query({
         text: query,
-        values: [moment(date).format('MM/DD/YYYY'), spots]
+        values: [moment.tz(date, 'America/Chicago').format('MM/DD/YYYY'), spots]
       }, (err) => {
         if (err) throw err;
         client.end();
@@ -43,10 +44,9 @@ function getClient() {
   return client;
 }
 function getAvailable(client, date, next) {
-  const dateString = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
   client.query({
     text: 'SELECT date, available FROM parkbot_spots where date=$1;',
-    values: [moment(date).format('MM/DD/YYYY')]
+    values: [moment.tz(date, 'America/Chicago').format('MM/DD/YYYY')]
   }, (err, result) => {
     if (err) throw err;
     let spots;
