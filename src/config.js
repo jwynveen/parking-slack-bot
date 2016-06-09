@@ -13,7 +13,7 @@ const config = {
   WEBHOOK_URL: process.env.WEBHOOK_URL,
   PARKBOT_COMMAND_TOKEN: process.env.PARKBOT_COMMAND_TOKEN,
   SLACK_TOKEN: process.env.SLACK_TOKEN,
-  ICON_EMOJI: ':stars:'
+  ICON_EMOJI: ':car:'
 }
 
 module.exports = (key) => {

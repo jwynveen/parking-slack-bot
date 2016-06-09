@@ -13,21 +13,17 @@ const msgDefaults = {
 }
 
 const handler = (payload, res, app) => {
-  dbService.getSpots((spots) => {
-
-    var attachments = spots.map((spot) => {
-      return {
-        title: `Spot #${spot}`,
-        //title_link: spot.url,
-        //text: `_${spot.description}_\n${spot.language} • ${spot.star}>`,
-        mrkdwn_in: ['text', 'pretext']
-      }
-    });
+  dbService.getSpots(new Date(), (spots) => {
 
     let msg = _.defaults({
       channel: payload.channel_name,
-      attachments: attachments
-    }, msgDefaults)
+    }, msgDefaults);
+
+    msg.attachments = [{
+      title: 'Available Spots:',
+      text: spots.map((spot) => `• Spot #${spot}`).join('\n'),
+      mrkdwn_in: ["text"]
+    }];
 
     res.set('content-type', 'application/json')
     res.status(200).json(msg)
